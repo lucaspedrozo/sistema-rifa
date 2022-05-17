@@ -23,14 +23,19 @@
                     ':a' => utf8_decode($requestData['NOME'])
                 ));
                 $dados = array(
+                    "tipo" => 'success',
+                    "mensagem" => 'Registro salvo com sucesso'
+                );
+            } catch(PDOException $e) {
+                $dados = array(
                     "tipo" => 'error',
-                    "mensagem" => 'Não foi possivel efetuar o cadastro do curso'
+                    "mensagem" = 'não foi possivel efetuar o cadastro do curso'
                 );
             }
         } else {
 
             try{
-                $stmt = $pdo>prepare('UPDATE TIPO SET NOME = :a WHERE ID = :id');
+                $stmt = $pdo->prepare('UPDATE TIPO SET NOME = :a WHERE ID = :id');
                 $stmt->execute(array(
                     ':id' => $ID,
                     ':a' => utf8_decode($requestData['NOME'])
@@ -42,7 +47,7 @@
             } catch (PDOException $e) {
                 $dados = array(
                     "tipo" => 'error',
-                    "mensagem" => 'Não foi possivel efetuar o alteracão do registro'
+                    "mensagem" => 'Não foi possivel efetuar o alteracão do registro.'
                 );
             }
         }
